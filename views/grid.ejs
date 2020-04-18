@@ -109,11 +109,11 @@
                         <%    results.forEach(element => { %>
                                           <%     if (element.day[0] == s && element.day[1] == d && element.day[2] == e ){ %>
                                             <%          %>
-                                            <%        console.log("the shits is", element.entry, "sde", String([s, d, e]))  %>
+                                            <%        //console.log("the shits is", element.entry, "sde", String([s, d, e]))  %>
                                             <%  submit = element.entry %>
                                             <%    }; %>
                                              <%  }); %>
-                                             <% console.log("the submit is ", submit); %>
+                                             <% //console.log("the submit is ", submit); %>
 
                             <input type="text" name="<%=s%><%=d%><%=e%>" id="<%=s%><%=d %>-<%=e %>" placeholder="" value="<%= submit %>">
 
@@ -135,14 +135,16 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
+    
     <script type="text/javascript">
-    console.log("Yerr");
+    //console.log("Yerr");
     </script>
 
     
     <script type="text/javascript">
 
     //jotform
+    /*
         function formAutoSubmit() {
             let inputs = $(".day .day-container input");
             console.log(inputs);
@@ -157,7 +159,7 @@
         
 
         window.onload = formAutoSubmit;
-        
+        */
     </script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -66,7 +66,7 @@ app.post("/", function (req, res) {
                 if (err) {
                     console.log(err)
                 } else {
-                    console.log("We have updated the needed shits", results)
+                    // console.log("We have updated the needed shits", results)
                 }
             });
 
