@@ -24,7 +24,7 @@
     <div class="head">
 
     </div>
-    <form>
+    
         <div class="container-fluid grid">
             <div class="row head">
                 <div class="col-4 text-center">
@@ -76,35 +76,92 @@
 
 
 
+            <form action="/" method="post">
+                <% let results = info %>
+                <% //console.log(results, typeof(results), results[1]);%>
+                <% for (let s = 0; s < 5; s++){ %>
 
-            <% for (let i = 0; i < 5; i++){ %>
-            <div class="row grid-row">
-                <div class="col-1 sub">
-                    <div class="rotation-wrapper-outer">
-                        <div class="rotation-wrapper-inner">
-                            <input type="text" id="sub-1" name="sub-1" placeholder="Subject 1">
+
+
+
+                <div class="row grid-row grid-row-<%=s %>">
+                    <div class="col-1 sub">
+                        <div class="rotation-wrapper-outer">
+                            <div class="rotation-wrapper-inner">
+                                <input type="text" class="subject" id="sub-<%=s %>" name="sub-<%=s %>" placeholder="Subject 1">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <% for (let i = 0; i < 7; i++){ %>
-                <div class="col day">
-                    <div class="day-container">
-                        <input type="text" name="sun-1-1" id="sun-1-1" placeholder="Enter Assignment">
-                        <input type="text" name="sun-1-2" id="sun-1-2" placeholder="Enter Assignment">
-                        <input type="text" name="sun-1-3" id="sun-1-3" placeholder="Enter Assignment">
-                        <input type="text" name="sun-1-4" id="sun-1-1" placeholder="Enter Assignment">
+                    <% for (let d = 0; d < 7; d++){ %>
+                    <div class="col day day-<%=d %>">
+                        <div class="day-container">
+                            <% for (let e = 0; e < 4; e++){ %>
+                            <%  let hold = "entry" + String(e); %> 
+
+
+                             <!--   
+                            <%   // let findDay = results.filter( item => item.day == [s, d, e] ); %>
+                            <%  // console.log(findDay); %>
+                            <%  //  console.log("entry is"  + findDay[hold]); %>
+                        -->  
+                            <% let submit = ""; %>
+
+                        <%    results.forEach(element => { %>
+                                          <%     if (element.day[0] == s && element.day[1] == d && element.day[2] == e ){ %>
+                                            <%          %>
+                                            <%        console.log("the shits is", element.entry, "sde", String([s, d, e]))  %>
+                                            <%  submit = element.entry %>
+                                            <%    }; %>
+                                             <%  }); %>
+                                             <% console.log("the submit is ", submit); %>
+
+                            <input type="text" name="<%=s%><%=d%><%=e%>" id="<%=s%><%=d %>-<%=e %>" placeholder="" value="<%= submit %>">
+
+                            <% } %>
+                        </div>
                     </div>
+                    <% } %>
                 </div>
                 <% } %>
-            </div>
-            <% } %>
-    </form>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    
+
 
 
 
 
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
+    <script type="text/javascript">
+    console.log("Yerr");
+    </script>
+
+    
+    <script type="text/javascript">
+
+    //jotform
+        function formAutoSubmit() {
+            let inputs = $(".day .day-container input");
+            console.log(inputs);
+            console.log(inputs[1]);
+            for(let i = 0; i < inputs.length; i++){
+                inputs[i].submit;
+                console.log("submitted" + inputs[i]);
+            };
+        
+        
+        }
+        
+
+        window.onload = formAutoSubmit;
+        
+    </script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 
 </body>
 

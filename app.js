@@ -8,23 +8,80 @@ const app = express();
 
 app.set('view engine', 'ejs')
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(express.static("public"))
 
-app.get("/", function(req, res){
-  //res.send("Hello");
-  let date = dates.getToday();
+app.get("/", function (req, res) {
+    //res.send("Hello");
+    let date = dates.getToday();
 
-  Task.find(function(err, results){
-    if(err){
-      console.log(err)
-    }else {
-      console.log(results)
+    //let entries = req.body;
+
+                Task.find(function (err, results) {
+                if (err) {
+                    console.log(err)
+                } else {
+                    console.log("Retrieved entries from database tasks in db")
+                }
+
+                res.render("grid", {
+                  day: date,
+                  info: results
+                  
+          
+                  
+              });
+              
+              });
+
+
+
+      
+    
+})
+
+
+
+app.post("/", function (req, res) {
+
+    let entries = req.body;
+
+    for (const item in entries) {
+        if (Number.isInteger(parseInt(item[0])) && Number.isInteger(parseInt(item[1]))) {
+            let sde = [parseInt(item[0]), parseInt(item[1]), parseInt(item[2])]
+
+            let query = {
+                day: sde
+            }
+
+            let update = {
+                "entry": entries[item],
+            };
+
+            //console.log(entries[item[0] + item[1] + "0"])
+
+            Task.findOneAndUpdate(query, update, function (err, results) {
+                if (err) {
+                    console.log(err)
+                } else {
+                    console.log("We have updated the needed shits", results)
+                }
+            });
+
+
+
+        }
     }
-  })
+    //console.log(req.body);
 
-  res.render("grid", {day: date});
+
+    res.redirect("/");
+
+
 });
+
 
 
 
@@ -37,11 +94,11 @@ app.post("/delete", function(req, res){
 
 let port = process.env.PORT;
 if (port == null || port == "") {
-  port = 3000;
+    port = 3000;
 }
 
-app.listen(port, function(){
-  console.log("Server started successfully");
+app.listen(port, function () {
+    console.log("Server started successfully");
 });
 
 
@@ -56,59 +113,59 @@ app.listen(port, function(){
 const mongoose = require('mongoose');
 
 //Creates connection and database if it doesnt exist
-mongoose.connect("mongodb+srv://nellyok:mongotest@my-planner-zevbi.mongodb.net/my-plannerDB", { useNewUrlParser: true,  useUnifiedTopology: true } );
+mongoose.connect("mongodb+srv://nellyok:mongotest@my-planner-zevbi.mongodb.net/my-plannerDB", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
 //**C**
 const tasksSchema = new mongoose.Schema({
-  day: String,
-  date: [Number],
-  entry1: String,
-  entry2: String,
-  entry3: String,
-  entry4: String,
-  //Validators
-  rating: {
-    type: Number,
-    min: 1,
-    max: 10,
-    required: [true, "Please check your data entry, no rating"]
-  }
-  //relationship: subSchema
+    day: [Number],
+    "entry": String,
+    /*,
+     //Validators
+     rating: {
+       type: Number,
+       min: 1,
+       max: 10,
+       required: [true, "Please check your data entry, no rating"]
+     }
+     //relationship: subSchema */
 })
-  
+
 const Task = mongoose.model("Task", tasksSchema) //creates a collectioon Task that uses schema
 
-const task = new Task ({
-  day: "Sunday",
-  date: [4,21],
-  entry1: "Eat",
-  entry2: "Sleep",
-  entry3: "Piss",
-  entry4: "",
-  rating: 10
+Task.find(function (err, tasks) {
+    if (err) {
+        console.log(err);
+    } else {
+        console.log("you have " + tasks.length + "Tasks");
+    }
+    /*
+    tasks.forEach(function(task){
+      console.log(task.day)
+    }); */
+    
+    if (tasks.length != 140) {
+        for (let s = 0; s < 5; s++) {
+            for (let d = 0; d < 7; d++) {
+              for (let e = 0; e < 4; e++) {
+                let task = new Task({
+                    day: [s, d, e],
+                    "entry": ""
+
+                });
+
+                task.save();
+              };
+            };
+        };
+    }
 });
 
-/*
-const task2 = new Task ({
-  day: "Sunday",
-  date: [4,21],
-  entry1: "Eat",
-  entry2: "Sleep",
-  entry3: "Piss",
-  entry4: ""
-});
 
-const task3 = new Task ({
-  day: "Sunday",
-  date: [4,21],
-  entry1: "Eat",
-  entry2: "Sleep",
-  entry3: "Piss",
-  entry4: ""
-});
-*/
 
-task.save();
+//task.save();
 /* Task.insertMany([task2, task3], function(err) {
   if (err) {
     console.log(err);
@@ -120,7 +177,7 @@ task.save();
 }); //if alot
 */
 
-//**R** 
+/* **R** 
 Task.find(function(err, tasks){
   if(err) {
     console.log(err);
@@ -134,11 +191,11 @@ Task.find(function(err, tasks){
     console.log(task.day)
   });
 
-});
+}); */
 
 
 //** U **
-/* Task.updateOne({_id: "5e9a97119c8ca686884a1a3d"}, {entry4: "YERRRR"}, function(err){
+/* Task.updateOne({_id: "5e9a97119c8ca686884a1a3d"}, {entry3: "YERRRR"}, function(err){
   if(err){
     console.log(err)
   } else {
@@ -150,24 +207,20 @@ Task.find(function(err, tasks){
 
 
 // ** D ** 
-
-Task.deleteOne({entry4: "YERRRR"}, function(err){
+/*
+Task.deleteOne({entry3: "YERRRR"}, function(err){
   if(err){
     console.log(err)
   } else {
     console.log("Success Deleted");
   };
-});
-
-
-Task.deleteMany({day: "Sunday"}, function(err){
+});*/
+/*
+Task.deleteMany( function(err){
   if(err){
     console.log(err)
   } else {
-    console.log("Success Deleted Many");
+    console.log("Success Deleted");
   };
-})
-
-
-
-
+}); 
+*/
