@@ -106,14 +106,20 @@
                         -->  
                             <% let submit = ""; %>
 
-                        <%    results.forEach(element => { %>
-                                          <%     if (element.day[0] == s && element.day[1] == d && element.day[2] == e ){ %>
+                        <%    //results.forEach(element => { %>
+                                          <%    // if (element.day[0] == s && element.day[1] == d && element.day[2] == e ){ %>
                                             <%          %>
                                             <%        //console.log("the shits is", element.entry, "sde", String([s, d, e]))  %>
-                                            <%  submit = element.entry %>
-                                            <%    }; %>
-                                             <%  }); %>
+                                            <%  //submit = element.entry %>
+                                            <%   // }; %>
+                                             <%//..}); %>
                                              <% //console.log("the submit is ", submit); %>
+
+                                                <%  function checkDay(element) { %>
+                                                    <%    return (element.day[0] == s && element.day[1] == d && element.day[2] == e); %>
+                                                    <% } %>
+                                                    <% let res = results.filter(checkDay); %>
+                                                    <%  submit = res[0].entry; %>
 
                             <input type="text" name="<%=s%><%=d%><%=e%>" id="<%=s%><%=d %>-<%=e %>" placeholder="" value="<%= submit %>">
 

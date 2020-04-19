@@ -21,7 +21,8 @@ app.get("/", function (req, res) {
 
                 Task.find(function (err, results) {
                 if (err) {
-                    console.log(err)
+                   
+                  console.log(err)
                 } else {
                     console.log("Retrieved entries from database tasks in db")
                 }
@@ -35,10 +36,6 @@ app.get("/", function (req, res) {
               });
               
               });
-
-
-
-      
     
 })
 
