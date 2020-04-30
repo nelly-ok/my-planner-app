@@ -1,3 +1,21 @@
+label{
+    margin: 0;
+
+}
+body {
+    color: #26547C;
+}
+
+input {
+    border: none;
+    background-color: inherit;
+    color: #26547C;
+}
+
+.day input {
+    border-bottom: 1px solid black;
+}
+
 .col {
     display: flex;
     justify-content: center;
@@ -7,10 +25,7 @@
 }
 
 .grid .col {
-    border-top:    1px solid  black;
-border-right:  1px solid  black;
-border-bottom: 1px solid  black;
-border-left:   1px solid  black;
+
 }
 
 .col-1 {
@@ -24,10 +39,25 @@ border-left:   1px solid  black;
     width: 8.5vw;
 }
 
-.dates {}
+.dates .col {
+    font-weight: bold;
+    padding: 0.5em 0.25em;
+}
 
-.day, .day input{
-    background-color: #D22277;
+.sub input{
+    font-weight: bold;
+}
+
+.day {
+    padding: 0 0.25rem;
+}
+
+.day.day-0, .day.day-2, .day.day-4, .day.day-6{
+    background-color: #2ec4b6;
+}
+
+.day.day-1, .day.day-3, .day.day-5{
+    background-color: #279AF1;
 }
 
 .day-container {
@@ -40,38 +70,49 @@ border-left:   1px solid  black;
     width: 100%;
 }
 
-.head {}
+.head {
+    background-color: black;
+    padding: 1rem 0;
+    padding: 0.5em;
+    font-size: 1.25em;
+    font-weight:  600 !important;
+    align-items: center;
+}
+
+.head div {
+    padding: 0;
+}
 
 .grid {
     display: flex;
     flex-direction: column;
     width: auto;
-    margin: 1rem;
 }
 
 .grid-row {
-border-top:    1px solid  black;
-border-right:  1px solid  black;
-border-bottom: 1px solid  black;
-border-left:   1px solid  black;
+    border-top: 1px solid #aaaa;
+    height: 17vh;
 }
 
 
 
 .rotation-wrapper-outer {
-    display: table;
 }
 
 .rotation-wrapper-inner {
-    padding: 50% 0;
-    height: 0;
+}
+
+
+.dates {
+    background-color: #FFD166;
 }
 
 .sub,
-.col-1.sub input,
-.dates {
-    background-color: #70C1B3;
+.col-1.sub input {
+    background-color: #FF3366;;
 }
+
+
 
 .subject,
 .test {
@@ -81,17 +122,16 @@ border-left:   1px solid  black;
      transform instead of this one. */
     transform: rotate(-90deg) translate(-100%);
     /* transform: rotate(90deg) translate(0, -100%); */
-    margin-top: -50%;
+    
 
     /* Not vital, but possibly a good idea if the element you're rotating contains
      text and you want a single long vertical line of text and the pre-rotation
      width of your element is small enough that the text wraps: */
     white-space: nowrap;
+    position: relative;
+    top: 8px;
+    top: 10px;
 }
-
-
-
-
 
 
 
@@ -100,3 +140,20 @@ border-left:   1px solid  black;
 .text-center {
     text-align: center;
 }
+
+
+
+
+#Submit {
+    width: 100%;
+    border: none;
+    color: #dccf;
+    background-color: #2ec4b6;
+    border-radius: 5px;
+    padding: 0.25em 0;
+}
+
+
+
+
+

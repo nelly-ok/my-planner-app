@@ -21,118 +21,136 @@
 </head>
 
 <body>
-    <div class="head">
-
-    </div>
     
-        <div class="container-fluid grid">
-            <div class="row head">
-                <div class="col-4 text-center">
-                    <h5>Chicago</h5>
-                </div>
-                <div class="col-4 text-center">
-                    <h3>My Planner</h3>
-                </div>
-                <div class="col">
-                    <p>Last Saved 7:00pm</p>
-                </div>
-                <div class="col">
-                    <h5>
-                        4:00pm
-                    </h5>
+
+    <div class="container-fluid grid">
+        <form action="/" method="post">
+        <div class="row head">
+            <div class="col">
+                <input id="Submit" type="submit" value="Submit">
+            </div>
+            <div class="col text-center">
+                <h5 id="Location">Chicago</h5>
+            </div>
+            <div class="col-4 text-center">
+                <h3>My Planner</h3>
+            </div>
+            <div class="col">
+                <p>Last Saved 7:00pm</p>
+            </div>
+            <div class="col">
+                <h5>
+                    <%=hr %>
+                </h5>
+            </div>
+        </div>
+        <div class="row dates">
+
+            <div class="col-1 sub">
+                <div class="rotation-wrapper-outer">
+                    <div class="rotation-wrapper-inner">
+                        <div class="test"></div>
+                    </div>
                 </div>
             </div>
-            <div class="row dates">
 
+
+
+            <div class="col day-0">
+                <label><%= day[6] %> </label>
+            </div>
+            <div class="col day-1">
+                <label><%= day[5] %></label>
+            </div>
+            <div class="col day-2">
+                <label><%= day[4] %></label>
+            </div>
+            <div class="col day-3">
+                <label><%= day[3] %></label>
+            </div>
+            <div class="col day-4">
+                <label><%= day[2] %></label>
+            </div>
+            <div class="col day-5">
+                <label><%= day[1] %></label>
+            </div>
+            <div class="col day-6">
+                <label><%= day[0] %></label>
+            </div>
+        </div>
+
+
+
+        
+            <% let results = info %>
+            <% let subjects = subs %>
+
+            <% //console.log(results, typeof(results), results[1]);%>
+            <% for (let s = 0; s < 5; s++){ %>
+                        
+                        <% let submitSub = ""; %>
+
+                        
+
+                        <%  function checkSub(element) { %>
+                        <%    return (element.subject == s ); %>
+                        <% } %>
+                        <% let subRes = subjects.filter(checkSub); %>
+                        <%  submitSub = subRes[0].entry; %>
+
+                
+
+
+            <div class="row grid-row grid-row-<%=s %>">
                 <div class="col-1 sub">
                     <div class="rotation-wrapper-outer">
                         <div class="rotation-wrapper-inner">
-                            <div class="test"></div>
+                            <input type="text" class="subject" id="sub-<%=s %>" name="sub-<%=s %>" placeholder="Subject 1" value="<%= submitSub %>">
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <label>Sunday <%= day %> </label>
-                </div>
-                <div class="col">
-                    <label>Monday x/xx</label>
-                </div>
-                <div class="col">
-                    <label>Tuesday x/xx</label>
-                </div>
-                <div class="col">
-                    <label>Wednesday x/xx</label>
-                </div>
-                <div class="col">
-                    <label>Thursday x/xx</label>
-                </div>
-                <div class="col">
-                    <label>Friday x/xx</label>
-                </div>
-                <div class="col">
-                    <label>Saturday x/xx</label>
-                </div>
-            </div>
-
-
-
-            <form action="/" method="post">
-                <% let results = info %>
-                <% //console.log(results, typeof(results), results[1]);%>
-                <% for (let s = 0; s < 5; s++){ %>
 
 
 
 
-                <div class="row grid-row grid-row-<%=s %>">
-                    <div class="col-1 sub">
-                        <div class="rotation-wrapper-outer">
-                            <div class="rotation-wrapper-inner">
-                                <input type="text" class="subject" id="sub-<%=s %>" name="sub-<%=s %>" placeholder="Subject 1">
-                            </div>
-                        </div>
-                    </div>
-                    <% for (let d = 0; d < 7; d++){ %>
-                    <div class="col day day-<%=d %>">
-                        <div class="day-container">
-                            <% for (let e = 0; e < 4; e++){ %>
-                            <%  let hold = "entry" + String(e); %> 
-
-
-                             <!--   
+                <% for (let d = 0; d < 7; d++){ %>
+                <div class="col day day-<%=d %>">
+                    <div class="day-container">
+                        <% for (let e = 0; e < 4; e++){ %>
+                       <!-- <%  let hold = "entry" + String(e); %> -->
+                        <!--   
                             <%   // let findDay = results.filter( item => item.day == [s, d, e] ); %>
                             <%  // console.log(findDay); %>
                             <%  //  console.log("entry is"  + findDay[hold]); %>
-                        -->  
-                            <% let submit = ""; %>
+                        -->
+                        <% let submit = ""; %>
 
                         <%    //results.forEach(element => { %>
-                                          <%    // if (element.day[0] == s && element.day[1] == d && element.day[2] == e ){ %>
-                                            <%          %>
-                                            <%        //console.log("the shits is", element.entry, "sde", String([s, d, e]))  %>
-                                            <%  //submit = element.entry %>
-                                            <%   // }; %>
-                                             <%//..}); %>
-                                             <% //console.log("the submit is ", submit); %>
+                        <%    // if (element.day[0] == s && element.day[1] == d && element.day[2] == e ){ %>
+                        <%          %>
+                        <%        //console.log("the shits is", element.entry, "sde", String([s, d, e]))  %>
+                        <%  //submit = element.entry %>
+                        <%   // }; %>
+                        <%//..}); %>
+                        <% //console.log("the submit is ", submit); %>
 
-                                                <%  function checkDay(element) { %>
-                                                    <%    return (element.day[0] == s && element.day[1] == d && element.day[2] == e); %>
-                                                    <% } %>
-                                                    <% let res = results.filter(checkDay); %>
-                                                    <%  submit = res[0].entry; %>
+                        <%  function checkDay(element) { %>
+                        <%    return (element.day[0] == s && element.day[1] == d && element.day[2] == e); %>
+                        <% } %>
+                        <% let res = results.filter(checkDay); %>
+                        <%  submit = res[0].entry; %>
 
-                            <input type="text" name="<%=s%><%=d%><%=e%>" id="<%=s%><%=d %>-<%=e %>" placeholder="" value="<%= submit %>">
+                        <input type="text" name="<%=s%><%=d%><%=e%>" id="<%=s%><%=d %>-<%=e %>" placeholder="" value="<%= submit %>">
 
-                            <% } %>
-                        </div>
+                        <% } %>
                     </div>
-                    <% } %>
                 </div>
                 <% } %>
-                <input type="submit" value="Submit">
-            </form>
-        </div>
-    
+            </div>
+            <% } %>
+        </form>
+    </div>
+
 
 
 
@@ -141,35 +159,62 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
-    
-    <script type="text/javascript">
-    //console.log("Yerr");
-    </script>
 
     
-    <script type="text/javascript">
+<!--
+        <p>Click the button to get your coordinates.</p>
+        
+        <button onclick="getLocation()">Try It</button>
+        
+        <p id="demo"></p>
+        
 
-    //jotform
-    /*
-        function formAutoSubmit() {
-            let inputs = $(".day .day-container input");
-            console.log(inputs);
-            console.log(inputs[1]);
-            for(let i = 0; i < inputs.length; i++){
-                inputs[i].submit;
-                console.log("submitted" + inputs[i]);
-            };
         
+        <script>
+        var x = document.getElementById("demo");
         
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+          }
         }
         
+        function showPosition(position) {
+          x.innerHTML = "Latitude: " + position.coords.latitude + 
+          "<br>Longitude: " + position.coords.longitude;
+        }
+        </script>
+-->
 
-        window.onload = formAutoSubmit;
-        */
+   
+
+
+    <script type="text/javascript">
+        //jotform
+        /*
+            function formAutoSubmit() {
+                let inputs = $(".day .day-container input");
+                console.log(inputs);
+                console.log(inputs[1]);
+                for(let i = 0; i < inputs.length; i++){
+                    inputs[i].submit;
+                    console.log("submitted" + inputs[i]);
+                };
+            
+            
+            }
+            
+
+            window.onload = formAutoSubmit;
+            */
+
     </script>
+    <script src="bundle.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 
 </body>
 

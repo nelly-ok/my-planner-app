@@ -4,7 +4,9 @@
   "description": "Simple web app for organizing homework and tasks",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./bin/www",
+    "watch": "nodemon --ignore public"
   },
   "repository": {
     "type": "git",
@@ -22,11 +24,15 @@
   "homepage": "https://github.com/nelly-ok/my-planner-app#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "connect-livereload": "^0.6.1",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
+    "geolocation": "^0.2.0",
     "jquery": "^3.5.0",
+    "livereload": "^0.9.1",
     "mongodb": "^3.5.6",
     "mongoose": "^5.9.9",
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.3",
+    "uniq": "^1.0.1"
   }
 }

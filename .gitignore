@@ -1,3 +1,7 @@
 /node_modules
 .DS_STROE
+node_modules
+package-lock.json
+EXAMPLE-backend
+secret.js
 /*.env
