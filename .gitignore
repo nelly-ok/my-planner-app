@@ -1,5 +1,6 @@
-/node_modules
-.DS_STROE
+/
+node_modules
+.DS_STORE
 node_modules
 package-lock.json
 EXAMPLE-backend
