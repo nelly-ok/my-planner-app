@@ -8,14 +8,14 @@ exports.getWeek = function(){
         res.push(today.getDay(i))
     }
 }
-console.log("time", parseInt(today.toTimeString()[0]+today.toTimeString()[1]), parseInt(today.toTimeString()[3]+today.toTimeString()[4]));
+//console.log("time", parseInt(today.toTimeString()[0]+today.toTimeString()[1]), parseInt(today.toTimeString()[3]+today.toTimeString()[4]));
 exports.getTime = function(){
     
     let hour = parseInt(today.toTimeString()[0]+today.toTimeString()[1]) % 12;
     let min =  parseInt(today.toTimeString()[3]+today.toTimeString()[4]);
-    console.log("hrr day", hour, min);
+    //console.log("hrr day", hour, min);
     let res =  hour.toString() + ':' + min.toString();
-    console.log("Res", res);
+    //console.log("Res", res);
     return res;
 }
 
@@ -35,9 +35,11 @@ exports.getToday = function(){
 
 
     // FOR FUTURE DAYS
+    console.log("Todays day is", day)
     for (let i = day, j = 1; i < 6; i++, j++) { //get days before today
         
         // Deef clean thee lock up
+        //console.log("entered future for lloop")
         let newDayData = [];
         let nyy = yy;
 
@@ -45,6 +47,7 @@ exports.getToday = function(){
         let ndd = 0;
 
 
+        //console.log("ddhold is", ddhold, "mmhold id", mmhold)
         if (ddhold == 28 && mmhold == 1 && (yy % 4)){ // if Feb 28 in reg year
             nmm =  mmhold + 1;     // increment to March 1
             ndd = 1;
@@ -114,15 +117,43 @@ exports.getToday = function(){
         let nmm = 0;
         let ndd = 0;
 
-        if (ddhold == 1){
-            nmm =  mmhold - 1;
-            ndd = 31;
+        if (ddhold == 1 && mmhold == 2 && !(yy % 4)){    // If March 1 on a reg year
+            nmm =  mmhold - 1; //deecreemeent and change to 28
+            ndd = 28;
             mmhold = nmm;
         }
+        else if (ddhold == 1 && mmhold == 2 && (yy % 4)){ // if March 1 in leap year
+            nmm =  mmhold - 1; // incr
+            ndd = 29;
+            mmhold = nmm;
+            console.log("March 1 on Leap Year");
+        }
+        else if (ddhold == 1 && (mmhold == 4 || mmhold == 6 || mmhold == 9 || mmhold == 11 )){ // if  Apr, Jun, Sept, Nov
+            nmm = mmhold - 1;
+            ndd = 30;
+            mmhold = nmm;
+            console.log("1st of May o JuL o Oct o Dec")
+        }
+        else if (ddhold == 1 ){
+            nmm = mmhold - 1; // else remining months
+            ndd = 31;
+            mmhold = nmm;
+            console.log("Remaining months")
+        } 
         else {
             nmm = mmhold;
             ndd = ddhold - 1;
+            console.log("Don't worry bout it baby this that spleh");
         }
+
+
+
+
+
+
+
+
+
 
         let nday = (day - j) % 7;
 
@@ -147,11 +178,13 @@ exports.getToday = function(){
         let newDate = new Date(week[i][0], week[i][1], week[i][2])
         console.log("week length is", week.length, "new date is", newDate);
         res.push(newDate.toLocaleDateString("en-US", options))
-
     }
 
 
     console.log("gas", week);
+
+    //console.log("week", res, res[6],
+    //new Date(2020, 3, 27));
 
     
 
